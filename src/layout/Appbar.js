@@ -11,7 +11,11 @@ const Appbar = () => {
             <Toolbar disableGutters>
               <Box sx={{ flexGrow: 1 }}>
                 <Button size="large" LinkComponent={Link} to="/">
-                  {"</WeatherApp>"}
+                  <img
+                    src="/images/weather-app-logo.png"
+                    alt="logo"
+                    width={"45px"}
+                  />
                 </Button>
               </Box>
             </Toolbar>
