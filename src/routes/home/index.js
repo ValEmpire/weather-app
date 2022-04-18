@@ -27,13 +27,17 @@ const Homepage = (props) => {
               alignItems="center"
             >
               <Box>
-                <Typography variant="h5">Ottawa, CA</Typography>
+                <Typography variant="h5" fontWeight={600}>
+                  Ottawa, CA
+                </Typography>
                 <Typography>Clouds</Typography>
                 <Typography>Feels like 30&#176;</Typography>
                 <Typography>H 34&#176; L 20&#176;</Typography>
               </Box>
               <Box>
-                <Typography variant="h3"> 20&#176;</Typography>
+                <Typography fontWeight={600} color={"primary"} variant="h3">
+                  20&#176;
+                </Typography>
               </Box>
             </Box>
 
