@@ -2,13 +2,31 @@ import React from "react";
 import { Box, Card, Divider, Typography } from "@mui/material";
 
 const Homepage = (props) => {
+  const {
+    selectedCity,
+    country,
+    sunrise,
+    sunset,
+    feelsLike,
+    main,
+    high,
+    low,
+    temperature,
+    humidity,
+    visibility,
+    windSpeed,
+    windDegree,
+    weatherIcon,
+    description,
+  } = props;
+
   const today = new Date().toDateString();
 
   const timeNow = new Date().toLocaleTimeString();
 
-  const sunrise = new Date(1650276717 * 1000).toLocaleTimeString();
+  const sunriseStr = new Date(sunrise * 1000).toLocaleTimeString();
 
-  const sunset = new Date(1650325909 * 1000).toLocaleTimeString();
+  const sunsetStr = new Date(sunset * 1000).toLocaleTimeString();
 
   return (
     <Card component={Box} p={3} m={2}>
@@ -26,15 +44,17 @@ const Homepage = (props) => {
         >
           <Box>
             <Typography variant="h5" fontWeight={600}>
-              Ottawa, CA
+              {`${selectedCity} ${country}`}
             </Typography>
-            <Typography>Clouds</Typography>
-            <Typography>Feels like 30&#176;</Typography>
-            <Typography>H 34&#176; L 20&#176;</Typography>
+            <Typography>{main}</Typography>
+            <Typography>Feels like {feelsLike}&#176;</Typography>
+            <Typography>
+              {`H ${high}`}&#176; {`L ${low}`}&#176;
+            </Typography>
           </Box>
           <Box>
             <Typography fontWeight={600} color={"primary"} variant="h3">
-              20&#176;
+              {temperature}&#176;
             </Typography>
           </Box>
         </Box>
@@ -50,22 +70,22 @@ const Homepage = (props) => {
         >
           <Box>
             <Typography>
-              Sunrise: <span>{sunrise}</span>
+              Sunrise: <span>{sunriseStr}</span>
             </Typography>
             <Typography>
-              Sunset: <span>{sunset}</span>
+              Sunset: <span>{sunsetStr}</span>
             </Typography>
-            <Typography>Humidy: 32</Typography>
-            <Typography>Visibility: 32</Typography>
-            <Typography>Wind Speed: 32</Typography>
-            <Typography>Wind Degree: 32</Typography>
+            <Typography>{`Humidity ${humidity}`}</Typography>
+            <Typography>{`Visibility ${visibility}`}</Typography>
+            <Typography>{`Wind Speed ${windSpeed}`}</Typography>
+            <Typography>{`Wind Degree ${windDegree}`}</Typography>
           </Box>
           <Box textAlign={"center"}>
             <img
-              src="https://openweathermap.org/img/wn/01d@2x.png"
+              src={`https://openweathermap.org/img/wn/${weatherIcon}@2x.png`}
               alt="weather description"
             />
-            <Typography fontWeight={600}>Clear Sky</Typography>
+            <Typography fontWeight={600}>{description}</Typography>
           </Box>
         </Box>
       </Box>

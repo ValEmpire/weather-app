@@ -6,14 +6,14 @@ import Weather from "./Weather";
 import { useSelector } from "react-redux";
 
 const Homepage = (props) => {
-  const { selectedCity } = useSelector((state) => state.city);
+  const city = useSelector((state) => state.city);
 
   return (
     <Grid container justifyContent={"center"}>
       <Grid item md={7} xs={12}>
-        {!selectedCity && <Home />}
+        {!city.selectedCity && <Home />}
 
-        {selectedCity && <Weather />}
+        {city.selectedCity && <Weather {...city} />}
       </Grid>
     </Grid>
   );

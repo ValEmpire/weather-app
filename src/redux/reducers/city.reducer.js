@@ -3,8 +3,6 @@ import { SET_CITY } from "../../const";
 const initialState = {
   selectedCity: null,
   country: null,
-  long: null,
-  lat: null,
   sunrise: null,
   sunset: null,
   feelsLike: null,
