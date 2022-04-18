@@ -3,7 +3,7 @@ import { Box, Card, Divider, Typography } from "@mui/material";
 
 const Homepage = (props) => {
   const {
-    selectedCity,
+    name,
     country,
     sunrise,
     sunset,
@@ -18,6 +18,7 @@ const Homepage = (props) => {
     windDegree,
     weatherIcon,
     description,
+    pressure,
   } = props;
 
   const today = new Date().toDateString();
@@ -43,8 +44,12 @@ const Homepage = (props) => {
           alignItems="center"
         >
           <Box>
-            <Typography variant="h5" fontWeight={600}>
-              {`${selectedCity} ${country}`}
+            <Typography
+              variant="h5"
+              fontWeight={600}
+              textTransform="capitalize"
+            >
+              {`${name} ${country}`}
             </Typography>
             <Typography>{main}</Typography>
             <Typography>Feels like {feelsLike}&#176;</Typography>
@@ -79,6 +84,7 @@ const Homepage = (props) => {
             <Typography>{`Visibility ${visibility}`}</Typography>
             <Typography>{`Wind Speed ${windSpeed}`}</Typography>
             <Typography>{`Wind Degree ${windDegree}`}</Typography>
+            <Typography>{`Pressure ${pressure}`}</Typography>
           </Box>
           <Box textAlign={"center"}>
             <img

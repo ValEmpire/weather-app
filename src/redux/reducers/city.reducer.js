@@ -1,7 +1,7 @@
 import { SET_CITY } from "../../const";
 
 const initialState = {
-  selectedCity: null,
+  name: null,
   country: null,
   sunrise: null,
   sunset: null,
@@ -11,6 +11,7 @@ const initialState = {
   low: null,
   temperature: null,
   humidity: null,
+  pressure: null,
   visibility: null,
   windSpeed: null,
   windDegree: null,
@@ -21,11 +22,37 @@ const initialState = {
 export const city = (state = initialState, action) => {
   switch (action.type) {
     case SET_CITY:
-      const data = action.payload;
+      const { data, city } = action.payload;
+
+      const { feels_like, humidity, pressure, temp, temp_max, temp_min } =
+        data.main;
+
+      const { description, icon, main } = data.weather[0];
+
+      const { sunrise, sunset, country } = data.sys;
+
+      const { visibility } = data;
+
+      const { speed, deg } = data.wind;
 
       return {
         ...state,
-        ...data,
+        name: city,
+        country,
+        sunrise,
+        visibility,
+        sunset,
+        feelsLike: feels_like,
+        main,
+        high: temp_max,
+        low: temp_min,
+        temperature: temp,
+        humidity,
+        pressure,
+        windSpeed: speed,
+        windDegree: deg,
+        weatherIcon: icon,
+        description: description,
       };
 
     default:

@@ -12,9 +12,9 @@ const Homepage = (props) => {
   return (
     <Grid container justifyContent={"center"}>
       <Grid item md={7} xs={12}>
-        {!city.selectedCity && <Home />}
+        {!city.name && <Home />}
 
-        {city.selectedCity && <Weather {...city} />}
+        {city.name && <Weather {...city} />}
       </Grid>
     </Grid>
   );

@@ -9,13 +9,23 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
+import { getCityWeather } from "../redux/actions";
+import { useDispatch } from "react-redux";
 
 const Appbar = () => {
-  const { city, setCity } = useState("");
+  const [city, setCity] = useState("");
+
+  const dispatch = useDispatch();
 
   const handleCityInput = (e) => {
     const city = e.target.value;
     setCity(city);
+  };
+
+  const handleCity = (e) => {
+    e.preventDefault();
+
+    dispatch(getCityWeather(city));
   };
 
   return (
@@ -55,12 +65,14 @@ const Appbar = () => {
                 </Box>
               </Box>
               <Box>
-                <OutlinedInput
-                  placeholder="Search city"
-                  endAdornment={<SearchIcon />}
-                  value={city}
-                  onChange={handleCityInput}
-                />
+                <form onSubmit={handleCity}>
+                  <OutlinedInput
+                    placeholder="Search city"
+                    endAdornment={<SearchIcon />}
+                    value={city}
+                    onChange={handleCityInput}
+                  />
+                </form>
               </Box>
             </Toolbar>
           </Container>
