@@ -3,6 +3,7 @@ import { Grid } from "@mui/material";
 import Home from "./Home";
 import Weather from "./Weather";
 
+// Redux
 import { useSelector } from "react-redux";
 
 const Homepage = (props) => {
