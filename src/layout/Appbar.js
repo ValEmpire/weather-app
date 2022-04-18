@@ -1,6 +1,14 @@
 import React from "react";
-import { AppBar, Box, Container, Toolbar, Button } from "@mui/material";
+import {
+  AppBar,
+  Box,
+  Container,
+  Toolbar,
+  Button,
+  OutlinedInput,
+} from "@mui/material";
 import { Link } from "react-router-dom";
+import SearchIcon from "@mui/icons-material/Search";
 
 const Appbar = () => {
   return (
@@ -10,13 +18,40 @@ const Appbar = () => {
           <Container maxWidth="lg">
             <Toolbar disableGutters>
               <Box sx={{ flexGrow: 1 }}>
-                <Button size="large" LinkComponent={Link} to="/">
-                  <img
-                    src="/images/weather-app-logo.png"
-                    alt="logo"
-                    width={"45px"}
-                  />
-                </Button>
+                {/* Display All on sm to xl screen */}
+                <Box display={{ xs: "none", sm: "inline" }}>
+                  <Button size="large" LinkComponent={Link} to="/">
+                    <img
+                      src="/images/weather-app-logo.png"
+                      alt="logo"
+                      width={"45px"}
+                    />
+                    <img
+                      src="/images/weather-app.png"
+                      alt="logo"
+                      width={"200px"}
+                    />
+                  </Button>
+                </Box>
+
+                <Box sx={{ flexGrow: 1 }}>
+                  {/* Display only logo on mobile screen */}
+                  <Box display={{ xs: "inline", sm: "none" }}>
+                    <Button size="large" LinkComponent={Link} to="/">
+                      <img
+                        src="/images/weather-app-logo.png"
+                        alt="logo"
+                        width={"45px"}
+                      />
+                    </Button>
+                  </Box>
+                </Box>
+              </Box>
+              <Box>
+                <OutlinedInput
+                  placeholder="Search city"
+                  endAdornment={<SearchIcon />}
+                />
               </Box>
             </Toolbar>
           </Container>
