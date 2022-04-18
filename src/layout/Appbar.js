@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   AppBar,
   Box,
@@ -11,6 +11,13 @@ import { Link } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 
 const Appbar = () => {
+  const { city, setCity } = useState("");
+
+  const handleCityInput = (e) => {
+    const city = e.target.value;
+    setCity(city);
+  };
+
   return (
     <>
       <Box height={"69px"}>
@@ -51,6 +58,8 @@ const Appbar = () => {
                 <OutlinedInput
                   placeholder="Search city"
                   endAdornment={<SearchIcon />}
+                  value={city}
+                  onChange={handleCityInput}
                 />
               </Box>
             </Toolbar>
