@@ -1,31 +1,38 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   AppBar,
   Box,
   Container,
   Toolbar,
   Button,
-  OutlinedInput,
+  Autocomplete,
+  TextField,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import SearchIcon from "@mui/icons-material/Search";
-import { getCityWeather } from "../redux/actions";
-import { useDispatch } from "react-redux";
+import { getCities, getWeatherByCoordinates, setCity } from "../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
 
 const Appbar = () => {
-  const [city, setCity] = useState("");
-
   const dispatch = useDispatch();
 
-  const handleCityInput = (e) => {
-    const city = e.target.value;
-    setCity(city);
+  const { cities } = useSelector((state) => state.city);
+
+  const handleCities = (e) => {
+    const name = e.target.value;
+
+    dispatch(getCities(name));
   };
 
-  const handleCity = (e) => {
-    e.preventDefault();
+  const handleCity = (e, value) => {
+    const { target } = e;
 
-    dispatch(getCityWeather(city));
+    const selectedCityIndex = target.id.slice(target.id.length - 1);
+
+    const city = cities[selectedCityIndex];
+
+    dispatch(getWeatherByCoordinates(city));
+
+    dispatch(setCity(city));
   };
 
   return (
@@ -64,15 +71,24 @@ const Appbar = () => {
                   </Box>
                 </Box>
               </Box>
-              <Box>
-                <form onSubmit={handleCity}>
-                  <OutlinedInput
-                    placeholder="Search city"
-                    endAdornment={<SearchIcon />}
-                    value={city}
-                    onChange={handleCityInput}
-                  />
-                </form>
+              <Box width={"250px"}>
+                <Autocomplete
+                  onChange={handleCity}
+                  options={cities.map(
+                    (option) =>
+                      `${option.name} ${option.state ?? ""} ${option.country}`
+                  )}
+                  isOptionEqualToValue={(option, value) =>
+                    option.name === value.name
+                  }
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      placeholder="Search city"
+                      onChange={handleCities}
+                    />
+                  )}
+                />
               </Box>
             </Toolbar>
           </Container>

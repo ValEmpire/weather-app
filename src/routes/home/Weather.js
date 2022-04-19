@@ -1,12 +1,12 @@
 import React from "react";
 import { Box, Divider, Paper, Typography } from "@mui/material";
-
 import { getDegree } from "../../util";
 import WeatherDetaill from "../../components/WeatherDetail";
 
 const Homepage = (props) => {
   const {
     name,
+    state,
     country,
     weatherIcon,
     description,
@@ -36,9 +36,9 @@ const Homepage = (props) => {
 
   const timeNow = new Date().toLocaleTimeString();
 
-  const sunriseStr = new Date(sunrise * 1000).toLocaleTimeString();
+  const sunriseStr = new Date(sunrise * 1000).toLocaleString();
 
-  const sunsetStr = new Date(sunset * 1000).toLocaleTimeString();
+  const sunsetStr = new Date(sunset * 1000).toLocaleString();
 
   return (
     <>
@@ -58,7 +58,7 @@ const Homepage = (props) => {
                 fontWeight={600}
                 textTransform="capitalize"
               >
-                {`${name} ${country}`}
+                {`${name} ${state ?? ""} ${country}`}
               </Typography>
               <Typography>{main}</Typography>
               <Typography>Feels like {getDegree(feelsLike)}</Typography>
@@ -78,7 +78,7 @@ const Homepage = (props) => {
           </Box>
 
           <Box textAlign={"center"}>
-            <Typography variant="h5">Details</Typography>
+            <Typography variant="h6">Details</Typography>
           </Box>
 
           <Box

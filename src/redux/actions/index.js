@@ -1,3 +1,4 @@
-import { getCityWeather } from "./city.action";
+import { getCities, setCity } from "./city.action";
+import { getWeatherByCoordinates } from "./weather.action";
 
-export { getCityWeather };
+export { getCities, setCity, getWeatherByCoordinates };
