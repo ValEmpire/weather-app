@@ -6,7 +6,7 @@ const initialState = {
     name: null,
     country: null,
     state: null,
-    long: null,
+    lon: null,
     lat: null,
     timeZone: null,
   },

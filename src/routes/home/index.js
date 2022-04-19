@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Grid } from "@mui/material";
 import Home from "./Home";
 import Weather from "./Weather";
@@ -10,17 +10,24 @@ import { getWeatherByCoordinates } from "../../redux/actions";
 const Homepage = (props) => {
   const weather = useSelector((state) => state.weather);
 
-  const dispatch = useDispatch();
-
   const { selectedCity } = useSelector((state) => state.city);
 
-  const handleWeather = useCallback(() => {
-    setInterval(() => dispatch(getWeatherByCoordinates(selectedCity)), 10000);
-  }, [dispatch, selectedCity]);
+  const dispatch = useDispatch();
 
+  // this will call getWeatherByCoordinates every 10 seconds if city is not null
   useEffect(() => {
-    handleWeather();
-  }, [handleWeather]);
+    const timeout = setInterval(() => {
+      if (selectedCity.name) {
+        console.log("fetching");
+
+        dispatch(getWeatherByCoordinates(selectedCity));
+      }
+    }, 10000);
+
+    return () => {
+      clearInterval(timeout);
+    };
+  }, [selectedCity, dispatch]);
 
   return (
     <Grid container justifyContent={"center"}>
