@@ -2,11 +2,13 @@ import React from "react";
 import { Box, Divider, Paper, Typography } from "@mui/material";
 import { getDegree } from "../../util";
 import WeatherDetaill from "../../components/WeatherDetail";
+import moment from "moment-timezone";
 
 const Homepage = (props) => {
   const {
     name,
     state,
+    timeZone,
     country,
     weatherIcon,
     description,
@@ -36,9 +38,9 @@ const Homepage = (props) => {
 
   const timeNow = new Date().toLocaleTimeString();
 
-  const sunriseStr = new Date(sunrise * 1000).toLocaleString();
+  const sunriseStr = moment.tz(sunrise * 1000, timeZone).format("h:mma z");
 
-  const sunsetStr = new Date(sunset * 1000).toLocaleString();
+  const sunsetStr = moment.tz(sunset * 1000, timeZone).format("h:mma z");
 
   return (
     <>

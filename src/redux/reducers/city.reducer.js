@@ -8,6 +8,7 @@ const initialState = {
     state: null,
     long: null,
     lat: null,
+    timeZone: null,
   },
 };
 
