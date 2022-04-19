@@ -59,13 +59,9 @@ const Appbar = () => {
                 {/* Display All on sm to xl screen */}
                 <Box display={{ xs: "none", sm: "inline" }}>
                   <Button size="large" LinkComponent={Link} to="/">
+                    <img src="/images/logo.png" alt="logo" width={"45px"} />
                     <img
-                      src="/images/weather-app-logo.png"
-                      alt="logo"
-                      width={"45px"}
-                    />
-                    <img
-                      src="/images/weather-app.png"
+                      src="/images/weather-app-string.png"
                       alt="logo"
                       width={"200px"}
                     />
