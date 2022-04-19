@@ -11,7 +11,7 @@ const Home = () => {
     >
       <Box textAlign={"center"}>
         <Typography variant="h4">Welcome to Weather App</Typography>
-        <Typography variant="h6">Please search for your city</Typography>
+        <Typography variant="h6">Please search a city</Typography>
       </Box>
     </Box>
   );

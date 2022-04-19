@@ -9,30 +9,44 @@ import {
   TextField,
 } from "@mui/material";
 import { Link } from "react-router-dom";
+
+// Redux
 import { getCities, getWeatherByCoordinates, setCity } from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 const Appbar = () => {
+  // Initialize dispatch
   const dispatch = useDispatch();
 
+  // get cities from store
   const { cities } = useSelector((state) => state.city);
 
+  /**
+   * @param {city: string} e
+   */
   const handleCities = (e) => {
     const name = e.target.value;
-
-    dispatch(getCities(name));
+    return dispatch(getCities(name));
   };
 
+  /**
+   *
+   * @param {*} e
+   * @param {*} value
+   */
   const handleCity = (e, value) => {
     const { target } = e;
 
+    // get the index of li element with id
     const selectedCityIndex = target.id.slice(target.id.length - 1);
 
+    // well use the selectedCityIndex to array cities
     const city = cities[selectedCityIndex];
 
+    // this will dispatch action with selectedCity
     dispatch(getWeatherByCoordinates(city));
 
-    dispatch(setCity(city));
+    return dispatch(setCity(city));
   };
 
   return (
@@ -74,6 +88,7 @@ const Appbar = () => {
               <Box width={"250px"}>
                 <Autocomplete
                   onChange={handleCity}
+                  // map all cities from store
                   options={cities.map(
                     (option) =>
                       `${option.name} ${option.state ?? ""} ${option.country}`

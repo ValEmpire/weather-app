@@ -26,6 +26,8 @@ const Homepage = (props) => {
     pressure,
   } = props;
 
+  // create array with details
+  // will be use to map
   const weatherDetails = [
     { name: "Humidity", value: humidity },
     { name: "Visibilitiy", value: visibility },
@@ -38,8 +40,8 @@ const Homepage = (props) => {
 
   const timeNow = new Date().toLocaleTimeString();
 
+  // use moment with timeZone from store
   const sunriseStr = moment.tz(sunrise * 1000, timeZone).format("h:mma z");
-
   const sunsetStr = moment.tz(sunset * 1000, timeZone).format("h:mma z");
 
   return (

@@ -1,6 +1,11 @@
 import axios from "axios";
 import { SET_WEATHER } from "../../const";
 
+/**
+ * This will fetch weatherByCoordinates by openweathermap api.
+ * @param {object} city
+ * @returns dispatch that will trigger store with type SET_WEATHER
+ */
 export const getWeatherByCoordinates = (city) => async (dispatch) => {
   try {
     const API_KEY = process.env.REACT_APP_OPEN_WEATHER_MAP_API_KEY;
