@@ -12,7 +12,7 @@ export const getCities = (city) => async (dispatch) => {
     const OPEN_WEATHER_API_KEY = process.env.REACT_APP_OPEN_WEATHER_MAP_API_KEY;
 
     const res = await axios.get(
-      `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${OPEN_WEATHER_API_KEY}&limit=5`
+      `https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${OPEN_WEATHER_API_KEY}&limit=5`
     );
 
     return dispatch({
@@ -38,7 +38,7 @@ export const setCity = (city) => async (dispatch) => {
 
     const { lon, lat } = city;
 
-    const url = `http://api.timezonedb.com/v2.1/get-time-zone?key=${TIMEZONE_API_KEY}&by=position&lng=${lon}&lat=${lat}&format=json`;
+    const url = `https://api.timezonedb.com/v2.1/get-time-zone?key=${TIMEZONE_API_KEY}&by=position&lng=${lon}&lat=${lat}&format=json`;
 
     const res = await axios.get(url);
 
