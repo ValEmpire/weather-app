@@ -1,25 +1,36 @@
 import React from "react";
-import { Box, Card, Divider, Typography } from "@mui/material";
+import { Box, Divider, Paper, Typography } from "@mui/material";
+
+import { getDegree } from "../../util";
+import WeatherDetaill from "../../components/WeatherDetail";
 
 const Homepage = (props) => {
   const {
     name,
     country,
-    sunrise,
-    sunset,
+    weatherIcon,
+    description,
     feelsLike,
     main,
     high,
     low,
     temperature,
+    sunrise,
+    sunset,
     humidity,
     visibility,
     windSpeed,
     windDegree,
-    weatherIcon,
-    description,
     pressure,
   } = props;
+
+  const weatherDetails = [
+    { name: "Humidity", value: humidity },
+    { name: "Visibilitiy", value: visibility },
+    { name: "Wind Speed", value: windSpeed },
+    { name: "Wind Degree", value: windDegree },
+    { name: "Pressure", value: pressure },
+  ];
 
   const today = new Date().toDateString();
 
@@ -30,72 +41,73 @@ const Homepage = (props) => {
   const sunsetStr = new Date(sunset * 1000).toLocaleTimeString();
 
   return (
-    <Card component={Box} p={3} m={2}>
-      <Box textAlign="center" pb={2}>
-        <Typography variant="h6" fontWeight={600}>
-          {`${today} / ${timeNow}`}
-        </Typography>
+    <>
+      <Box textAlign="right" mt={5} pr={3}>
+        <small>{`${today} / ${timeNow}`}</small>
       </Box>
-
-      <Box>
-        <Box
-          display="flex"
-          justifyContent={"space-between"}
-          alignItems="center"
-        >
-          <Box>
-            <Typography
-              variant="h5"
-              fontWeight={600}
-              textTransform="capitalize"
-            >
-              {`${name} ${country}`}
-            </Typography>
-            <Typography>{main}</Typography>
-            <Typography>Feels like {feelsLike}&#176;</Typography>
-            <Typography>
-              {`H ${high}`}&#176; {`L ${low}`}&#176;
-            </Typography>
+      <Paper elevation={3} component={Box} p={3} m={2}>
+        <Box>
+          <Box
+            display="flex"
+            justifyContent={"space-between"}
+            alignItems="center"
+          >
+            <Box>
+              <Typography
+                variant="h5"
+                fontWeight={600}
+                textTransform="capitalize"
+              >
+                {`${name} ${country}`}
+              </Typography>
+              <Typography>{main}</Typography>
+              <Typography>Feels like {getDegree(feelsLike)}</Typography>
+              <Typography>
+                H {getDegree(high)} L {getDegree(low)}
+              </Typography>
+            </Box>
+            <Box>
+              <Typography fontWeight={600} color={"primary"} variant="h3">
+                {getDegree(temperature)}
+              </Typography>
+            </Box>
           </Box>
-          <Box>
-            <Typography fontWeight={600} color={"primary"} variant="h3">
-              {temperature}&#176;
-            </Typography>
-          </Box>
-        </Box>
 
-        <Box mt={3} mb={3}>
-          <Divider />
-        </Box>
-
-        <Box
-          display="flex"
-          justifyContent={"space-between"}
-          alignItems="center"
-        >
-          <Box>
-            <Typography>
-              Sunrise: <span>{sunriseStr}</span>
-            </Typography>
-            <Typography>
-              Sunset: <span>{sunsetStr}</span>
-            </Typography>
-            <Typography>{`Humidity ${humidity}`}</Typography>
-            <Typography>{`Visibility ${visibility}`}</Typography>
-            <Typography>{`Wind Speed ${windSpeed}`}</Typography>
-            <Typography>{`Wind Degree ${windDegree}`}</Typography>
-            <Typography>{`Pressure ${pressure}`}</Typography>
+          <Box mt={3} mb={3}>
+            <Divider />
           </Box>
+
           <Box textAlign={"center"}>
-            <img
-              src={`https://openweathermap.org/img/wn/${weatherIcon}@2x.png`}
-              alt="weather description"
-            />
-            <Typography fontWeight={600}>{description}</Typography>
+            <Typography variant="h5">Details</Typography>
+          </Box>
+
+          <Box
+            display="flex"
+            justifyContent={"space-between"}
+            alignItems="center"
+          >
+            <Box>
+              <WeatherDetaill name={"Sunrise"} value={sunriseStr} />
+              <WeatherDetaill name={"Sunset"} value={sunsetStr} />
+
+              {weatherDetails.map((detail, i) => (
+                <WeatherDetaill {...detail} key={detail.value + i} />
+              ))}
+            </Box>
+
+            <Box textAlign={"center"}>
+              <img
+                src={`https://openweathermap.org/img/wn/${weatherIcon}@2x.png`}
+                alt="weather description"
+              />
+              <Typography fontWeight={600} textTransform="capitalize">
+                {description}
+              </Typography>
+            </Box>
           </Box>
         </Box>
-      </Box>
-    </Card>
+      </Paper>
+    </>
   );
 };
 

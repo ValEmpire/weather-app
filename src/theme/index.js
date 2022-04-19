@@ -10,16 +10,6 @@ const customTheme = createTheme({
       contrastText: "#fff",
     },
   },
-
-  components: {
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          borderRadius: "95px",
-        },
-      },
-    },
-  },
 });
 
 /**
