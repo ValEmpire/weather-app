@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Divider, Paper, Typography } from "@mui/material";
+import { Box, Divider, Grid, Paper, Typography } from "@mui/material";
 import { getDegree } from "../../util";
 import WeatherDetaill from "../../components/WeatherDetail";
 import moment from "moment-timezone";
@@ -85,30 +85,29 @@ const Homepage = (props) => {
             <Typography variant="h6">Details</Typography>
           </Box>
 
-          <Box
-            display="flex"
-            justifyContent={"space-between"}
-            alignItems="center"
-          >
-            <Box>
+          <Grid container>
+            <Grid item sm={6} xs={12} order={{ sm: 1, xs: 2 }}>
               <WeatherDetaill name={"Sunrise"} value={sunriseStr} />
               <WeatherDetaill name={"Sunset"} value={sunsetStr} />
 
               {weatherDetails.map((detail, i) => (
                 <WeatherDetaill {...detail} key={detail.value + i} />
               ))}
-            </Box>
-
-            <Box textAlign={"center"}>
-              <img
-                src={`https://openweathermap.org/img/wn/${weatherIcon}@2x.png`}
-                alt="weather description"
-              />
-              <Typography fontWeight={600} textTransform="capitalize">
-                {description}
-              </Typography>
-            </Box>
-          </Box>
+            </Grid>
+            <Grid item sm={6} xs={12} order={{ sm: 2, xs: 1 }}>
+              <Box display={"flex"} justifyContent={"center"} pb={2} mb={1}>
+                <Box textAlign={"center"}>
+                  <img
+                    src={`https://openweathermap.org/img/wn/${weatherIcon}@2x.png`}
+                    alt="weather description"
+                  />
+                  <Typography fontWeight={600} textTransform="capitalize">
+                    {description}
+                  </Typography>
+                </Box>
+              </Box>
+            </Grid>
+          </Grid>
         </Box>
       </Paper>
     </>
